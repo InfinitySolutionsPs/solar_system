@@ -1,0 +1,1 @@
+{"name":"solar-system-electricity-billing","version":"1.0.0","private":true,"description":"Weekly electricity billing and subscriber management","main":"server.js","scripts":{"start":"node server.js","dev":"node server.js"},"dependencies":{"express":"^4.21.2","sql.js":"^1.14.2"}}
