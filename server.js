@@ -23,7 +23,8 @@ const ready = initSqlJs().then(SQL=>{
   if(!subscriberColumns.includes('credit_balance')) db.run('ALTER TABLE subscribers ADD COLUMN credit_balance REAL NOT NULL DEFAULT 0');
   const invoiceColumns = all('PRAGMA table_info(invoices)').map(column=>column.name);
   if(!invoiceColumns.includes('minimum_charge')) db.run('ALTER TABLE invoices ADD COLUMN minimum_charge REAL NOT NULL DEFAULT 0');
-  if(!invoiceColumns.includes('paid_amount')) db.run('ALTER TABLE invoices ADD COLUMN paid_amount REAL NOT NULL DEFAULT 0');\n  db.run('UPDATE invoices SET paid_amount=amount WHERE paid=1 AND paid_amount=0');
+  if(!invoiceColumns.includes('paid_amount')) db.run('ALTER TABLE invoices ADD COLUMN paid_amount REAL NOT NULL DEFAULT 0');
+  db.run('UPDATE invoices SET paid_amount=amount WHERE paid=1 AND paid_amount=0');
   persist();
   return db;
 });
