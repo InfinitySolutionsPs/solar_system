@@ -18,7 +18,9 @@ const ready = initSqlJs().then(SQL=>{
   const subscriberColumns = all('PRAGMA table_info(subscribers)').map(column=>column.name);
   if(!subscriberColumns.includes('initial_reading')) db.run('ALTER TABLE subscribers ADD COLUMN initial_reading REAL NOT NULL DEFAULT 0');
   if(!subscriberColumns.includes('weekly_minimum')) db.run('ALTER TABLE subscribers ADD COLUMN weekly_minimum REAL NOT NULL DEFAULT 25');
-  if(!subscriberColumns.includes('opening_balance')) db.run('ALTER TABLE subscribers ADD COLUMN opening_balance REAL NOT NULL DEFAULT 0');\n  if(!subscriberColumns.includes('opening_balance_paid')) db.run('ALTER TABLE subscribers ADD COLUMN opening_balance_paid REAL NOT NULL DEFAULT 0');\n  if(!subscriberColumns.includes('credit_balance')) db.run('ALTER TABLE subscribers ADD COLUMN credit_balance REAL NOT NULL DEFAULT 0');
+  if(!subscriberColumns.includes('opening_balance')) db.run('ALTER TABLE subscribers ADD COLUMN opening_balance REAL NOT NULL DEFAULT 0');
+  if(!subscriberColumns.includes('opening_balance_paid')) db.run('ALTER TABLE subscribers ADD COLUMN opening_balance_paid REAL NOT NULL DEFAULT 0');
+  if(!subscriberColumns.includes('credit_balance')) db.run('ALTER TABLE subscribers ADD COLUMN credit_balance REAL NOT NULL DEFAULT 0');
   const invoiceColumns = all('PRAGMA table_info(invoices)').map(column=>column.name);
   if(!invoiceColumns.includes('minimum_charge')) db.run('ALTER TABLE invoices ADD COLUMN minimum_charge REAL NOT NULL DEFAULT 0');
   if(!invoiceColumns.includes('paid_amount')) db.run('ALTER TABLE invoices ADD COLUMN paid_amount REAL NOT NULL DEFAULT 0');\n  db.run('UPDATE invoices SET paid_amount=amount WHERE paid=1 AND paid_amount=0');
